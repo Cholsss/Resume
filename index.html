@@ -21,7 +21,6 @@
             }
             .home__title-color { color: var(--first-color); }
             .button { background-color: var(--first-color); color: #fff; padding: .75rem 2rem; border-radius: .5rem; font-weight: 600; display: inline-block; margin-top: 2rem; }
-            .button-small { padding: .5rem 1rem; font-size: 0.8rem; margin-top: 1rem; }
             .section-title::after { background-color: var(--first-color); }
             .nav__logo, .nav__link.active, .home__social-icon, .skills__icon, .skills__subtitle, .about__subtitle { color: var(--first-color); }
             
@@ -32,14 +31,6 @@
             .footer__icon { font-size: 1.5rem; color: #fff; margin: 0 1rem; }
             
             .skills__bar { background-color: var(--first-color); }
-
-            /* Deployed Projects Styling */
-            .deployed__container { row-gap: 2rem; }
-            .deployed__content { background-color: #fff; border-radius: .5rem; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 1.5rem; text-align: center; transition: .3s; }
-            .deployed__content:hover { box-shadow: 0 10px 15px rgba(0,0,0,0.15); }
-            .deployed__img { width: 100%; border-radius: .5rem; margin-bottom: 1rem; border: 1px solid #eee; }
-            .deployed__title { font-size: 1.1rem; color: var(--first-color); margin-bottom: .5rem; }
-            .deployed__subtitle { font-size: 0.85rem; color: var(--text-color); margin-bottom: 1rem; display: block; }
         </style>
     </head>
     <body>
@@ -162,31 +153,14 @@
                 </div>
             </section>
 
-            <!--===== DEPLOYED PROJECTS =====-->
-            <section class="deployed section" id="deployed">
-                <h2 class="section-title">Deployed Projects</h2>
+            <!--===== WEBSITES DEPLOYED =====-->
+            <section class="work section" id="deployed">
+                <h2 class="section-title">Websites Deployed</h2>
 
-                <div class="deployed__container bd-grid">
-                    <div class="deployed__content">
-                        <img src="assets/img/deployed1.png" alt="Project Smile Preview" class="deployed__img">
-                        <h3 class="deployed__title">Project Smile</h3>
-                        <span class="deployed__subtitle">UI/UX Prototype & Web Interface</span>
-                        <a href="#" class="button button-small">View Live</a>
-                    </div>
-
-                    <div class="deployed__content">
-                        <img src="assets/img/deployed2.png" alt="ADNU Automation Preview" class="deployed__img">
-                        <h3 class="deployed__title">ADNU Process Automation</h3>
-                        <span class="deployed__subtitle">Administrative Office Information System</span>
-                        <a href="#" class="button button-small">View Case Study</a>
-                    </div>
-
-                    <div class="deployed__content">
-                        <img src="assets/img/deployed3.png" alt="DailyMood Preview" class="deployed__img">
-                        <h3 class="deployed__title">DailyMood App</h3>
-                        <span class="deployed__subtitle">Tracking Application Interface</span>
-                        <a href="#" class="button button-small">View Prototype</a>
-                    </div>
+                <div class="work__container bd-grid">
+                    <a href="#" class="work__img"><img src="assets/img/deployed1.png" alt="Project Smile Deployed"></a>
+                    <a href="#" class="work__img"><img src="assets/img/deployed2.png" alt="Process Automation System"></a>
+                    <a href="#" class="work__img"><img src="assets/img/deployed3.png" alt="DailyMood Web Interface"></a>
                 </div>
             </section>
 
