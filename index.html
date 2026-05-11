@@ -18,7 +18,6 @@
                 --container-color: #FFF;
             }
 
-            /* Dark Theme Variables */
             body.dark-theme {
                 --title-color: #F9FAFB;
                 --text-color: #CBD5E0;
@@ -26,78 +25,73 @@
                 --container-color: #2D3748;
             }
 
-            body { background-color: var(--body-color); color: var(--text-color); transition: .3s; }
+            body { background-color: var(--body-color); color: var(--text-color); transition: .3s; margin: 0; font-family: 'Poppins', sans-serif; }
+            .bd-grid { max-width: 1024px; display: grid; grid-template-columns: 100%; margin-left: 2rem; margin-right: 2rem; }
+            
+            @media screen and (min-width: 1024px) {
+                .bd-grid { margin-left: auto; margin-right: auto; }
+            }
 
-            .home__title-color { color: var(--first-color); }
-            .button { background-color: var(--first-color); color: #fff; padding: .75rem 2rem; border-radius: .5rem; font-weight: 600; display: inline-block; margin-top: 1rem; border: none; cursor: pointer; text-decoration: none; transition: .3s; }
-            .button-light { background-color: #edf2f7; color: var(--first-color); border: 1px solid var(--first-color); margin-left: 1rem; }
-            
-            .section-title::after { background-color: var(--first-color); }
-            
-            /* Home Section Fixes */
+            /* --- HOME SECTION ALIGNMENT --- */
             .home { 
-                padding: 9rem 0 2rem; 
+                height: 100vh;
                 display: grid; 
-                grid-template-columns: repeat(2, 1fr); 
+                grid-template-columns: 1.2fr 0.8fr; 
                 align-items: center; 
                 column-gap: 2rem;
             } 
-            .home__data { grid-column: 1; }
-            .home__img { grid-column: 2; display: flex; justify-content: center; }
+            .home__data { align-self: center; }
+            .home__title { font-size: 3.5rem; line-height: 1.2; color: var(--title-color); margin-bottom: 2rem; }
+            .home__title-color { color: var(--first-color); }
+            
             .home__social { 
                 display: flex; 
                 flex-direction: row; 
                 column-gap: 1.5rem; 
-                margin-top: 2rem; 
-                grid-column: 1;
+                margin-top: 2.5rem; 
             }
             .home__social-icon { font-size: 1.5rem; color: var(--first-color); transition: .3s; }
-            .home__social-icon:hover { color: var(--first-color-alt); }
-            .home__blob { width: 400px; fill: var(--first-color); }
+            .home__blob { width: 450px; fill: var(--first-color); }
 
-            /* Work/Misc Cards */
-            .work__container { row-gap: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); column-gap: 2rem; }
-            .work__card { background: var(--container-color); padding: 1rem; border-radius: .5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: .3s; text-align: center; }
-            .work__card:hover { transform: translateY(-0.5rem); }
-            .work__img { height: 180px; border-radius: .5rem; overflow: hidden; margin-bottom: 1rem; display: block; }
-            .work__img img { width: 100%; height: 100%; object-fit: cover; }
-            .work__title { font-weight: 600; color: var(--first-color); font-size: 0.9rem; }
+            /* --- BUTTONS --- */
+            .button { background-color: var(--first-color); color: #fff; padding: .75rem 2rem; border-radius: .5rem; font-weight: 600; display: inline-block; transition: .3s; text-decoration: none; border: none; cursor: pointer; }
+            .button-light { background-color: #edf2f7; color: var(--first-color); border: 1px solid var(--first-color); margin-left: 1rem; }
+            .button:hover { background-color: var(--first-color-alt); transform: translateY(-3px); }
 
-            .misc__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-            
-            /* Contact Fix */
-            .contact__container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; align-items: start; }
-            .contact__info-card { background-color: var(--container-color); padding: 1.5rem; border-radius: .5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center; }
-            .contact__info-icon { font-size: 2rem; color: var(--first-color); margin-bottom: 1rem; }
+            /* --- SECTION TITLES --- */
+            .section-title { font-size: 2rem; color: var(--first-color); margin: 3rem 0; text-align: center; position: relative; }
+            .section-title::after { content: ''; width: 50px; height: 3px; background: var(--first-color); position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); }
 
-            .footer { background-color: var(--first-color); color: #fff; text-align: center; padding: 2rem 0; margin-top: 4rem; }
-            .footer__icon { font-size: 1.5rem; color: #fff; margin: 0 1rem; }
-
-            .nav__btns { display: flex; align-items: center; column-gap: 1rem; }
-            .change-theme { font-size: 1.25rem; color: var(--title-color); cursor: pointer; transition: .3s; }
-            
-            @media screen and (max-width: 767px) {
-                .home { grid-template-columns: 1fr; row-gap: 2rem; padding-top: 6rem; }
-                .home__data, .home__img, .home__social { grid-column: 1; justify-content: center; text-align: center; }
-                .home__blob { width: 300px; }
-                .button-light { margin-left: 0; margin-top: 1rem; }
+            /* --- WORK & MISC CARDS --- */
+            .work__container, .misc__grid { 
+                display: grid; 
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+                gap: 1.5rem; 
             }
+            .work__card { background: var(--container-color); padding: 1rem; border-radius: .8rem; box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: .3s; text-align: center; border: 1px solid rgba(0,0,0,0.02); }
+            .work__card:hover { transform: translateY(-0.5rem); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+            .work__img { height: 160px; border-radius: .5rem; overflow: hidden; margin-bottom: 1rem; display: block; }
+            .work__img img { width: 100%; height: 100%; object-fit: cover; }
+            .work__title { font-weight: 600; color: var(--title-color); font-size: 0.85rem; display: block; }
 
-            @media screen and (min-width: 768px) {
-                .nav__menu { position: static; background: transparent; padding: 0; }
-                .nav__list { display: flex; column-gap: 2rem; list-style: none; }
-                .nav__item { margin-bottom: 0; }
-                .nav__toggle { display: none; }
+            /* --- MOBILE ADAPTATION --- */
+            @media screen and (max-width: 767px) {
+                .home { grid-template-columns: 1fr; text-align: center; height: auto; padding: 7rem 0 3rem; }
+                .home__img { order: -1; margin-bottom: 2rem; display: flex; justify-content: center; }
+                .home__blob { width: 280px; }
+                .home__social { justify-content: center; }
+                .button-light { margin-left: 0; margin-top: 1rem; }
+                .home__title { font-size: 2.5rem; }
             }
         </style>
     </head>
     <body>
         <header class="l-header">
-            <nav class="nav bd-grid">
-                <div><a href="#" class="nav__logo" style="color: var(--title-color); text-decoration: none; font-weight: 700;">Cholo</a></div>
+            <nav class="nav bd-grid" style="display: flex; justify-content: space-between; align-items: center; height: 4rem;">
+                <div><a href="#" class="nav__logo" style="color: var(--title-color); text-decoration: none; font-weight: 700; font-size: 1.2rem;">Cholo</a></div>
                 <div class="nav__menu" id="nav-menu">
-                    <ul class="nav__list">
-                        <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
+                    <ul class="nav__list" style="display: flex; column-gap: 2rem; list-style: none;">
+                        <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
                         <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
                         <li class="nav__item"><a href="#video" class="nav__link">Video</a></li>
                         <li class="nav__item"><a href="#artifacts" class="nav__link">Artifacts</a></li>
@@ -105,10 +99,9 @@
                         <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
                     </ul>
                 </div>
-
                 <div class="nav__btns">
                     <i class='bx bx-moon change-theme' id="theme-button"></i>
-                    <div class="nav__toggle" id="nav-toggle"><i class='bx bx-menu'></i></div>
+                    <div class="nav__toggle" id="nav-toggle" style="display: none;"><i class='bx bx-menu'></i></div>
                 </div>
             </nav>
         </header>
@@ -116,7 +109,7 @@
         <main class="l-main">
             <section class="home bd-grid" id="home">
                 <div class="home__data">
-                    <h1 class="home__title" style="font-size: 3rem; color: var(--title-color);">Hi,<br>I am <span class="home__title-color">Eric Joseph,</span><br>IS Project Manager</h1>
+                    <h1 class="home__title">Hi,<br>I am <span class="home__title-color">Eric Joseph,</span><br>IS Project Manager</h1>
                     <div class="home__buttons">
                         <a href="#contact" class="button">Hire Me</a>
                         <a href="Assets/docs/CV_Cholo.pdf" download="CV_Cholo.pdf" class="button button-light">Application Letter</a>
@@ -138,21 +131,12 @@
 
             <section class="about section" id="about">
                 <h2 class="section-title">About Me</h2>
-                <div class="about__container bd-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; align-items: center;">
-                    <div class="about__img"><img src="Assets/img/cholo_coding.png" alt="Cholo coding" style="width: 100%; border-radius: .5rem;"></div>
+                <div class="about__container bd-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center;">
+                    <div class="about__img"><img src="Assets/img/cholo_coding.png" alt="Cholo coding" style="width: 100%; border-radius: 1rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1);"></div>
                     <div>
-                        <h2 class="about__subtitle" style="color: var(--title-color);">Developing Scalable Solutions</h2>
-                        <p class="about__text">I am a modernization specialist dedicated to transforming outdated legacy systems into high-efficiency digital tools. I blend technical precision with specialized training in AI Literacy and Supply Chain Management.</p>
+                        <h2 class="about__subtitle" style="color: var(--title-color); margin-bottom: 1.5rem;">Developing Scalable Solutions</h2>
+                        <p class="about__text" style="line-height: 1.8; margin-bottom: 2rem;">I am a modernization specialist dedicated to transforming outdated legacy systems into high-efficiency digital tools. I blend technical precision with specialized training in AI Literacy and Supply Chain Management.</p>
                         <a href="#artifacts" class="button">View My Work</a>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section" id="video">
-                <h2 class="section-title">Video Resume</h2>
-                <div class="bd-grid" style="text-align: center;">
-                    <div style="display: flex; justify-content: center; align-items: center;">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/I0Azu0LPifc" frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
             </section>
@@ -177,49 +161,61 @@
 
             <section class="work section" id="misc">
                 <h2 class="section-title">Miscellaneous Projects</h2>
-                <h3 style="text-align: center; color: var(--first-color); margin-top: 2rem;">Interactive Scratch Games</h3>
+                
+                <h3 style="text-align: center; color: var(--first-color); margin: 2rem 0;">Interactive Scratch Games</h3>
                 <div class="misc__grid bd-grid">
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/938124085" target="_blank" class="work__img"><img src="Assets/img/gameproject1.png"></a><span class="work__title">Game 1</span></div>
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939330739/" target="_blank" class="work__img"><img src="Assets/img/gameproject2.png"></a><span class="work__title">Game 2</span></div>
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/938215185/" target="_blank" class="work__img"><img src="Assets/img/gameproject3.png"></a><span class="work__title">Game 3</span></div>
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939363783" target="_blank" class="work__img"><img src="Assets/img/gameproject4.png"></a><span class="work__title">Game 4</span></div>
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939314923" target="_blank" class="work__img"><img src="Assets/img/gameproject5.png"></a><span class="work__title">Game 5</span></div>
+                    <div class="work__card"><a href="https://scratch.mit.edu/projects/938124085" target="_blank" class="work__img"><img src="Assets/img/gameproject1.png"></a><span class="work__title">Game Project 1</span></div>
+                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939330739/" target="_blank" class="work__img"><img src="Assets/img/gameproject2.png"></a><span class="work__title">Game Project 2</span></div>
+                    <div class="work__card"><a href="https://scratch.mit.edu/projects/938215185/" target="_blank" class="work__img"><img src="Assets/img/gameproject3.png"></a><span class="work__title">Game Project 3</span></div>
+                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939363783" target="_blank" class="work__img"><img src="Assets/img/gameproject4.png"></a><span class="work__title">Game Project 4</span></div>
+                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939314923" target="_blank" class="work__img"><img src="Assets/img/gameproject5.png"></a><span class="work__title">Game Project 5</span></div>
+                    <div class="work__card"><a href="https://scratch.mit.edu/projects/938242384/" target="_blank" class="work__img"><img src="Assets/img/gameproject6.png"></a><span class="work__title">Game Project 6</span></div>
+                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939602761" target="_blank" class="work__img"><img src="Assets/img/gameproject7.png"></a><span class="work__title">Game Project 7</span></div>
+                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939596084/" target="_blank" class="work__img"><img src="Assets/img/gameproject8.png"></a><span class="work__title">Game Project 8</span></div>
+                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939390917/" target="_blank" class="work__img"><img src="Assets/img/gameproject9.png"></a><span class="work__title">Game Project 9</span></div>
+                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939568000/" target="_blank" class="work__img"><img src="Assets/img/gameproject10.png"></a><span class="work__title">Game Project 10</span></div>
+                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939655239/" target="_blank" class="work__img"><img src="Assets/img/gameproject11.png"></a><span class="work__title">Game Project 11</span></div>
                 </div>
 
-                <h3 style="text-align: center; color: var(--first-color); margin-top: 4rem;">C++ Technical Projects</h3>
+                <h3 style="text-align: center; color: var(--first-color); margin: 4rem 0 2rem;">C++ Technical Projects</h3>
                 <div class="misc__grid bd-grid">
                     <div class="work__card"><a href="https://www.online-cpp.com/IQdFf7WHjV" target="_blank" class="work__img"><img src="Assets/img/bingo.png"></a><span class="work__title">Bingo System</span></div>
                     <div class="work__card"><a href="https://www.online-cpp.com/FQjvn29MCw" target="_blank" class="work__img"><img src="Assets/img/5numcalc.png"></a><span class="work__title">5-Num Calc</span></div>
+                    <div class="work__card"><a href="https://www.online-cpp.com/dM6gz7ecHo" target="_blank" class="work__img"><img src="Assets/img/numberguessgame.png"></a><span class="work__title">Guessing Game</span></div>
+                    <div class="work__card"><a href="https://www.online-cpp.com/rFJ71k9LQY" target="_blank" class="work__img"><img src="Assets/img/tempconverter.png"></a><span class="work__title">Temp Converter</span></div>
+                    <div class="work__card"><a href="https://www.online-cpp.com/6E74tVxKkl" target="_blank" class="work__img"><img src="Assets/img/tictaclol.png"></a><span class="work__title">Tic-Tac-Toe</span></div>
+                    <div class="work__card"><a href="https://www.online-cpp.com/X90jdr1bim" target="_blank" class="work__img"><img src="Assets/img/hiluworld.png"></a><span class="work__title">Hello World</span></div>
                 </div>
             </section>
 
             <section class="contact section" id="contact">
                 <h2 class="section-title">Contact</h2>
-                <div class="contact__container bd-grid">
+                <div class="contact__container bd-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
                     <form action="https://formspree.io/f/xbdwdqzz" method="POST" class="contact__form" style="display: grid; row-gap: 1rem;">
-                        <input type="text" name="name" placeholder="Name" style="width: 100%; padding: 1rem; border-radius: .5rem; border: 1px solid var(--text-color); background: var(--container-color); color: var(--title-color);" required>
-                        <input type="email" name="email" placeholder="Email" style="width: 100%; padding: 1rem; border-radius: .5rem; border: 1px solid var(--text-color); background: var(--container-color); color: var(--title-color);" required>
-                        <textarea name="message" placeholder="Message" cols="0" rows="10" style="width: 100%; padding: 1rem; border-radius: .5rem; border: 1px solid var(--text-color); background: var(--container-color); color: var(--title-color);" required></textarea>
+                        <input type="text" name="name" placeholder="Name" style="width: 100%; padding: 1rem; border-radius: .5rem; border: 1px solid #ddd; background: var(--container-color); color: var(--title-color);" required>
+                        <input type="email" name="email" placeholder="Email" style="width: 100%; padding: 1rem; border-radius: .5rem; border: 1px solid #ddd; background: var(--container-color); color: var(--title-color);" required>
+                        <textarea name="message" placeholder="Message" cols="0" rows="10" style="width: 100%; padding: 1rem; border-radius: .5rem; border: 1px solid #ddd; background: var(--container-color); color: var(--title-color);" required></textarea>
                         <button type="submit" class="button">Send Message</button>
                     </form>
 
-                    <div class="contact__info-card">
-                        <i class='bx bx-envelope contact__info-icon'></i>
+                    <div class="contact__info-card" style="background-color: var(--container-color); padding: 2rem; border-radius: .5rem; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+                        <i class='bx bx-envelope' style="font-size: 3rem; color: var(--first-color); margin-bottom: 1.5rem;"></i>
                         <h3 style="color: var(--title-color);">Email Me Directly</h3>
+                        <p>ejgalang.educ@gmail.com</p>
                         <a href="mailto:ejgalang.educ@gmail.com" class="button">Open Email App</a>
                     </div>
                 </div>
             </section>
         </main>
 
-        <footer class="footer">
-            <p class="footer__title">Eric Joseph P. Galang Jr.</p>
-            <div class="footer__social" style="margin-bottom: 1rem;">
-                <a href="https://www.facebook.com/ericjoseph.chols" class="footer__icon"><i class='bx bxl-facebook' ></i></a>
-                <a href="https://instagram.com/cholooos" class="footer__icon"><i class='bx bxl-instagram' ></i></a>
-                <a href="https://twitter.com/cholstrssd " class="footer__icon"><i class='bx bxl-twitter' ></i></a>
+        <footer class="footer" style="background-color: var(--first-color); color: #fff; text-align: center; padding: 3rem 0; margin-top: 5rem;">
+            <p class="footer__title" style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;">Eric Joseph P. Galang Jr.</p>
+            <div class="footer__social" style="margin-bottom: 2rem;">
+                <a href="https://www.facebook.com/ericjoseph.chols" class="footer__icon" style="color: #fff; font-size: 1.5rem; margin: 0 1rem;"><i class='bx bxl-facebook' ></i></a>
+                <a href="https://instagram.com/cholooos" class="footer__icon" style="color: #fff; font-size: 1.5rem; margin: 0 1rem;"><i class='bx bxl-instagram' ></i></a>
+                <a href="https://twitter.com/cholstrssd " class="footer__icon" style="color: #fff; font-size: 1.5rem; margin: 0 1rem;"><i class='bx bxl-twitter' ></i></a>
             </div>
-            <p>&#169; 2026 Professional Portfolio. All rights reserved.</p>
+            <p style="font-size: 0.8rem; opacity: 0.7;">&#169; 2026 Professional Portfolio. All rights reserved.</p>
         </footer>
 
         <script src="Assets/js/main.js"></script>
