@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" href="Assets/css/styles.css">
-        <!-- =====BOX ICONS===== -->
         <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
         <title>Portfolio | Eric Joseph P. Galang Jr.</title>
@@ -17,20 +16,26 @@
                 --text-color: #4A5568;
             }
             .home__title-color { color: var(--first-color); }
-            .button { background-color: var(--first-color); color: #fff; padding: .75rem 2rem; border-radius: .5rem; font-weight: 600; display: inline-block; margin-top: 1rem; border: none; cursor: pointer; text-decoration: none; }
+            .button { background-color: var(--first-color); color: #fff; padding: .75rem 2rem; border-radius: .5rem; font-weight: 600; display: inline-block; margin-top: 1rem; border: none; cursor: pointer; text-decoration: none; transition: .3s; }
+            .button:hover { background-color: var(--first-color-alt); }
             .button-light { background-color: #edf2f7; color: var(--first-color); border: 1px solid var(--first-color); }
             
             .section-title::after { background-color: var(--first-color); }
             .nav__logo, .nav__link.active, .home__social-icon, .skills__icon, .skills__subtitle, .about__subtitle { color: var(--first-color); }
             
             /* Grid and Layout Fixes */
-            .work__container { row-gap: 2rem; }
-            .work__card { background: #fff; padding: 1rem; border-radius: .5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-            .work__img { height: 200px; border-radius: .5rem; overflow: hidden; margin-bottom: 1rem; }
+            .work__container { row-gap: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); column-gap: 2rem; }
+            .work__card { background: #fff; padding: 1rem; border-radius: .5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: .3s; }
+            .work__card:hover { transform: translateY(-0.5rem); }
+            .work__img { height: 200px; border-radius: .5rem; overflow: hidden; margin-bottom: 1rem; display: block; }
             .work__img img { width: 100%; height: 100%; object-fit: cover; }
             .work__text { font-size: 0.85rem; color: var(--text-color); margin-top: 0.5rem; line-height: 1.4; }
             .work__title { font-weight: 600; color: var(--first-color); display: block; margin-top: 0.5rem; }
 
+            /* Fixes for overlapping and alignment */
+            .home { padding: 8rem 0 2rem; } /* Increased top padding to prevent header overlap */
+            .about__container { align-items: center; }
+            
             .footer { background-color: var(--first-color); color: #fff; text-align: center; padding: 2rem 0; }
             .footer__icon { font-size: 1.5rem; color: #fff; margin: 0 1rem; }
 
@@ -38,10 +43,14 @@
             .reflection__container { background: #f9fafb; padding: 2rem; border-radius: .5rem; border-left: 5px solid var(--first-color); }
             .reflection__item { margin-bottom: 1.5rem; }
             .reflection__subtitle { font-weight: 600; color: var(--first-color); margin-bottom: 0.5rem; display: block; }
+            
+            /* Game Projects Specific Grid */
+            .misc__container { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; }
+            .misc__card { text-align: center; }
+            .misc__img { height: 120px; }
         </style>
     </head>
     <body>
-        <!--===== HEADER =====-->
         <header class="l-header">
             <nav class="nav bd-grid">
                 <div><a href="#" class="nav__logo">Cholo</a></div>
@@ -50,6 +59,7 @@
                         <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
                         <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
                         <li class="nav__item"><a href="#artifacts" class="nav__link">Artifacts</a></li>
+                        <li class="nav__item"><a href="#misc" class="nav__link">Misc</a></li>
                         <li class="nav__item"><a href="#reflection" class="nav__link">Reflection</a></li>
                         <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
                     </ul>
@@ -59,17 +69,14 @@
         </header>
 
         <main class="l-main">
-            <!--===== HOME (Objective 2: Personal Branding) =====-->
             <section class="home bd-grid" id="home">
                 <div class="home__data">
                     <h1 class="home__title">Hi,<br>I am <span class="home__title-color">Eric Joseph,</span><br>IS Project Manager</h1>
-                    <!-- GUIDELINE REQUIREMENT: Career goal statement -->
-                    <p style="margin-top: 1rem; color: var(--text-color);">My goal is to bridge the gap between technical complexity and business efficiency through professional communication and user-centric Information Systems design.</p>
+                    <p style="margin-top: 1rem; color: var(--text-color); max-width: 450px;">My goal is to bridge the gap between technical complexity and business efficiency through professional communication and user-centric Information Systems design.</p>
                     
                     <div class="home__buttons">
                         <a href="#contact" class="button">Hire Me</a>
-                        <!-- GUIDELINE REQUIREMENT: Application Letter Hyperlink -->
-                        <a href="YOUR_LINK_HERE" target="_blank" class="button button-light">Application Letter</a>
+                        <a href="#" target="_blank" class="button button-light">Application Letter</a>
                     </div>
                 </div>
 
@@ -88,67 +95,70 @@
                 </div>
             </section>
 
-            <!--===== ABOUT (Guideline 3a: Short Bio) =====-->
             <section class="about section" id="about">
                 <h2 class="section-title">About Me</h2>
                 <div class="about__container bd-grid">
                     <div class="about__img"><img src="Assets/img/cholo_coding.png" alt="Profile Photo"></div>
                     <div>
-                        <h2 class="about__subtitle">Professional Identity</h2>
-                        <!-- GUIDELINE REQUIREMENT: 3-5 Sentences Bio -->
-                        <p class="about__text">I am an Information Systems student at [Your University], dedicated to optimizing organizational workflows through digital transformation. My expertise lies in UI/UX prototyping and full-cycle system documentation, ensuring technical solutions align with user needs. I focus on delivering high-impact projects that demonstrate both technical proficiency and professional communication excellence.</p>
+                        <h2 class="about__subtitle">Developing Scalable Solutions</h2>
+                        <p class="about__text">I am a highly motivated Information Systems student at Ateneo de Naga University, specializing in the intersection of technical development and business process optimization. With a strong foundation in UI/UX design and full-cycle system documentation, I transform complex manual processes into efficient digital experiences. My focus remains on delivering high-impact solutions that drive organizational success through technical precision and professional communication.</p>
                     </div>                                    
                 </div>
             </section>
 
-            <!--===== VIDEO RESUME (Guideline 3b) =====-->
-            <section class="section" id="video-resume">
-                <h2 class="section-title">Video Resume</h2>
-                <div class="bd-grid" style="text-align: center;">
-                    <p style="margin-bottom: 1rem;">Watch a brief overview of my professional qualifications and career goals.</p>
-                    <div style="background: #000; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; color: #fff; border-radius: .5rem;">
-                        <!-- Replace with your YouTube or Drive embed link -->
-                        <p>Embed Video Link Here</p>
-                    </div>
-                </div>
-            </section>
-
-            <!--===== ARTIFACTS (Guideline 3d: 3-5 outputs with Context) =====-->
             <section class="work section" id="artifacts">
                 <h2 class="section-title">Sample Works & Artifacts</h2>
                 <div class="work__container bd-grid">
-                    
-                    <!-- Artifact 1 -->
                     <div class="work__card">
                         <a href="https://seiki11.onrender.com/" target="_blank" class="work__img">
                             <img src="Assets/img/seiki.png" alt="Seiki System">
                         </a>
                         <span class="work__title">Seiki: Process Automation</span>
-                        <p class="work__text"><strong>Context:</strong> Developed as a full-stack automation system to streamline manual workflows. This project demonstrates my ability to handle system logic and professional technical documentation.</p>
+                        <p class="work__text"><strong>Context:</strong> A full-stack automation system to streamline manual workflows at Ateneo de Naga. Demonstrates system logic and documentation skills.</p>
                     </div>
 
-                    <!-- Artifact 2 -->
                     <div class="work__card">
                         <a href="#" class="work__img">
                             <img src="Assets/img/projectsmile.png" alt="Figma Prototype">
                         </a>
                         <span class="work__title">Project Smile UI/UX</span>
-                        <p class="work__text"><strong>Context:</strong> A high-fidelity prototype designed in Figma. This artifact showcases my skills in audience awareness and visual communication principles for digital interfaces.</p>
+                        <p class="work__text"><strong>Context:</strong> High-fidelity mood tracker prototype designed in Figma. Showcases audience awareness and visual communication principles.</p>
                     </div>
 
-                    <!-- Artifact 3 -->
                     <div class="work__card">
                         <a href="#" class="work__img">
                             <img src="Assets/img/bingo.png" alt="C++ Project">
                         </a>
                         <span class="work__title">C++ Logic Development</span>
-                        <p class="work__text"><strong>Context:</strong> A logical programming output focused on algorithmic efficiency. This represents my foundational technical communication and problem-solving skills.</p>
+                        <p class="work__text"><strong>Context:</strong> Logical programming output focused on algorithmic efficiency and problem-solving through C++ development.</p>
                     </div>
-
                 </div>
             </section>
 
-            <!--===== REFLECTION (Guideline 3e) =====-->
+            <section class="work section" id="misc">
+                <h2 class="section-title">Miscellaneous Projects</h2>
+                <div class="work__container misc__container bd-grid">
+                    <div class="work__card misc__card">
+                        <a href="https://scratch.mit.edu/projects/938124085" target="_blank" class="work__img misc__img">
+                            <img src="Assets/img/gameproject1.png" alt="Game 1">
+                        </a>
+                        <span class="work__title">Scratch Project I</span>
+                    </div>
+                    <div class="work__card misc__card">
+                        <a href="https://scratch.mit.edu/projects/939330739/" target="_blank" class="work__img misc__img">
+                            <img src="Assets/img/gameproject2.png" alt="Game 2">
+                        </a>
+                        <span class="work__title">Scratch Project II</span>
+                    </div>
+                    <div class="work__card misc__card">
+                        <a href="https://scratch.mit.edu/projects/938215185/" target="_blank" class="work__img misc__img">
+                            <img src="Assets/img/gameproject3.png" alt="Game 3">
+                        </a>
+                        <span class="work__title">Scratch Project III</span>
+                    </div>
+                </div>
+            </section>
+
             <section class="section" id="reflection">
                 <h2 class="section-title">Reflection</h2>
                 <div class="reflection__container bd-grid">
@@ -163,7 +173,6 @@
                 </div>
             </section>
 
-            <!--===== CONTACT =====-->
             <section class="contact section" id="contact">
                 <h2 class="section-title">Contact</h2>
                 <div class="contact__container bd-grid">
@@ -180,8 +189,8 @@
         <footer class="footer">
             <p class="footer__title">Eric Joseph P. Galang Jr.</p>
             <div class="footer__social">
-                <a href="#" class="footer__icon"><i class='bx bxl-facebook' ></i></a>
-                <a href="#" class="footer__icon"><i class='bx bxl-linkedin' ></i></a>
+                <a href="https://www.linkedin.com/in/eric-joseph-jr-p-galang-547ab42a4/" class="footer__icon"><i class='bx bxl-linkedin'></i></a>
+                <a href="https://github.com/Cholsss" class="footer__icon"><i class='bx bxl-github' ></i></a>
             </div>
             <p>&#169; 2026 Professional Portfolio. All rights reserved.</p>
         </footer>
