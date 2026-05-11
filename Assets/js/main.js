@@ -16,7 +16,6 @@ const navLink = document.querySelectorAll('.nav__link')
 
 function linkAction(){
     const navMenu = document.getElementById('nav-menu')
-    // When we click on each nav__link, we remove the show-menu class
     navMenu.classList.remove('show')
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
@@ -30,16 +29,45 @@ function scrollActive(){
     sections.forEach(current =>{
         const sectionHeight = current.offsetHeight
         const sectionTop = current.offsetTop - 50;
-        sectionId = current.getAttribute('id')
+        let sectionId = current.getAttribute('id')
+        
+        const navItem = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
 
-        if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
-            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active')
-        }else{
-            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active')
+        if(navItem){
+            if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
+                navItem.classList.add('active')
+            }else{
+                navItem.classList.remove('active')
+            }
         }
     })
 }
 window.addEventListener('scroll', scrollActive)
+
+/*==================== DARK LIGHT THEME ====================*/ 
+const themeButton = document.getElementById('theme-button')
+const darkTheme = 'dark-theme'
+const iconTheme = 'bx-sun'
+
+const selectedTheme = localStorage.getItem('selected-theme')
+const selectedIcon = localStorage.getItem('selected-icon')
+
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'bx-moon' : 'bx-sun'
+
+if (selectedTheme) {
+  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+  if(themeButton) themeButton.classList[selectedIcon === 'bx-moon' ? 'add' : 'remove'](iconTheme)
+}
+
+if(themeButton){
+    themeButton.addEventListener('click', () => {
+        document.body.classList.toggle(darkTheme)
+        themeButton.classList.toggle(iconTheme)
+        localStorage.setItem('selected-theme', getCurrentTheme())
+        localStorage.setItem('selected-icon', getCurrentIcon())
+    })
+}
 
 /*===== SCROLL REVEAL ANIMATION =====*/
 const sr = ScrollReveal({
@@ -47,10 +75,9 @@ const sr = ScrollReveal({
     distance: '60px',
     duration: 2000,
     delay: 200,
-//     reset: true
 });
 
 sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
 sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400}); 
 sr.reveal('.home__social-icon',{ interval: 200}); 
-sr.reveal('.skills__data, .work__img, .contact__input',{interval: 200}); 
+sr.reveal('.skills__data, .work__img, .contact__input',{interval: 200});
