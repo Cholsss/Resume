@@ -359,6 +359,31 @@ img {
 }
 
 /* ===== CONTACT =====*/
+.contact__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  align-items: stretch; /* Ensures form and card have same height */
+}
+
+.contact__info-card {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: .5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.contact__info-icon {
+  font-size: 2rem;
+  color: var(--first-color);
+  margin-bottom: 1rem;
+}
+
 .contact__input {
   width: 100%;
   font-size: var(--normal-font-size);
@@ -451,11 +476,13 @@ img {
     padding-top: 2rem;
   }
   .contact__form {
-    width: 360px;
+    width: 100%; /* Changed from 360px to allow flex growth */
+    max-width: 450px;
     padding-top: 2rem;
   }
   .contact__container {
     justify-items: center;
+    align-items: stretch;
   }
 }
 
