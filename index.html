@@ -9,58 +9,93 @@
 
         <title>Portfolio | Eric Joseph P. Galang Jr.</title>
         <style>
+            /* --- THEME VARIABLES --- */
             :root {
                 --first-color: #1A365D; 
                 --first-color-alt: #2A4365;
                 --title-color: #2D3748;
                 --text-color: #4A5568;
+                --body-color: #FBFEFF;
+                --container-color: #FFF;
             }
+
+            /* --- DARK THEME OVERRIDES --- */
+            body.dark-theme {
+                --title-color: #F9FAFB;
+                --text-color: #CBD5E0;
+                --body-color: #1A202C;
+                --container-color: #2D3748;
+            }
+
+            /* Global Transition for smooth switching */
+            body {
+                background-color: var(--body-color);
+                color: var(--text-color);
+                transition: .4s;
+                margin: 0;
+            }
+
             .home__title-color { color: var(--first-color); }
             .button { background-color: var(--first-color); color: #fff; padding: .75rem 2rem; border-radius: .5rem; font-weight: 600; display: inline-block; margin-top: 1rem; border: none; cursor: pointer; text-decoration: none; transition: .3s; }
             .button-light { background-color: #edf2f7; color: var(--first-color); border: 1px solid var(--first-color); }
+            
+            /* Apply dynamic colors to cards/sections */
+            .work__card, .contact__info-card, .contact__input { 
+                background-color: var(--container-color); 
+                color: var(--text-color);
+            }
+            .section-title, .about__subtitle, .home__title { color: var(--title-color); }
             
             .section-title::after { background-color: var(--first-color); }
             
             /* Layout Fixes */
             .home { padding: 9rem 0 2rem; } 
             .work__container { row-gap: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); column-gap: 2rem; }
-            .work__card { background: #fff; padding: 1rem; border-radius: .5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: .3s; text-align: center; }
+            .work__card { padding: 1rem; border-radius: .5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: .3s; text-align: center; }
             .work__card:hover { transform: translateY(-0.5rem); }
             .work__img { height: 180px; border-radius: .5rem; overflow: hidden; margin-bottom: 1rem; display: block; }
             .work__img img { width: 100%; height: 100%; object-fit: cover; }
             .work__title { font-weight: 600; color: var(--first-color); font-size: 0.9rem; }
 
-            /* Grid for smaller misc items */
             .misc__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
             
-            /* Contact Side-by-Side Fix */
-            .contact__container {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 2rem;
-                align-items: start;
-            }
-            .contact__info-card {
-                background-color: #fff;
-                padding: 1.5rem;
-                border-radius: .5rem;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-                text-align: center;
-            }
-            .contact__info-icon {
-                font-size: 2rem;
-                color: var(--first-color);
-                margin-bottom: 1rem;
-            }
+            .contact__container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; align-items: start; }
+            .contact__info-card { padding: 1.5rem; border-radius: .5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: center; }
+            .contact__info-icon { font-size: 2rem; color: var(--first-color); margin-bottom: 1rem; }
 
             .footer { background-color: var(--first-color); color: #fff; text-align: center; padding: 2rem 0; }
             .footer__icon { font-size: 1.5rem; color: #fff; margin: 0 1rem; }
+
+            /* Theme Button Styling */
+            .nav__btns { display: flex; align-items: center; column-gap: 1rem; }
+            .change-theme { font-size: 1.25rem; color: var(--title-color); cursor: pointer; transition: .3s; }
+            .change-theme:hover { color: var(--first-color); }
+
+            /* --- MOBILE RESPONSIVENESS --- */
+            @media screen and (max-width: 767px) {
+                .nav__menu {
+                    position: fixed;
+                    top: -100%;
+                    left: 0;
+                    width: 100%;
+                    background-color: var(--container-color);
+                    padding: 2rem 0;
+                    transition: .4s;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                    text-align: center;
+                }
+                .nav__menu.show { top: 3rem; } /* Matches standard header height */
+                .nav__item { margin-bottom: 1.5rem; }
+                .home { padding: 6rem 0 2rem; }
+                iframe { width: 100%; height: auto; aspect-ratio: 16/9; }
+            }
         </style>
     </head>
     <body>
         <header class="l-header">
             <nav class="nav bd-grid">
                 <div><a href="#" class="nav__logo">Cholo</a></div>
+                
                 <div class="nav__menu" id="nav-menu">
                     <ul class="nav__list">
                         <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
@@ -71,7 +106,11 @@
                         <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
                     </ul>
                 </div>
-                <div class="nav__toggle" id="nav-toggle"><i class='bx bx-menu'></i></div>
+
+                <div class="nav__btns">
+                    <i class='bx bx-moon change-theme' id="theme-button"></i>
+                    <div class="nav__toggle" id="nav-toggle"><i class='bx bx-menu'></i></div>
+                </div>
             </nav>
         </header>
 
@@ -97,105 +136,7 @@
                 </div>
             </section>
 
-            <section class="about section" id="about">
-                <h2 class="section-title">About Me</h2>
-                <div class="about__container bd-grid">
-                    <div class="about__img"><img src="Assets/img/cholo_coding.png" alt="Cholo coding"></div>
-                    <div>
-                        <h2 class="about__subtitle">Developing Scalable Solutions</h2>
-                        <p class="about__text">I am a modernization specialist dedicated to transforming outdated legacy systems into high-efficiency digital tools. My experience ranges from revitalizing local businesses in Naga City to engineering a student-assistant system for Ateneo De Naga. While maintaining a 3.80 GPA, I blend the technical precision of Information Systems with specialized training in AI Literacy and Supply Chain Management</p>
-                        <a href="#artifacts" class="button">View My Work</a>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section" id="video">
-                <h2 class="section-title">Video Resume</h2>
-                <div class="bd-grid" style="text-align: center;">
-                    <p style="margin-bottom: 1.5rem; color: var(--text-color);">Watch my professional introduction and career highlights.</p>
-                    <div style="display: flex; justify-content: center; align-items: center;">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/I0Azu0LPifc?si=nxRQbBXnYRmiqSiB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </section>
-
-            <section class="work section" id="artifacts">
-                <h2 class="section-title">Core Artifacts</h2>
-                <div class="work__container bd-grid">
-                    <div class="work__card">
-                        <a href="https://seiki11.onrender.com/" target="_blank" class="work__img"><img src="Assets/img/seiki.png" alt="Seiki"></a>
-                        <span class="work__title">Seiki: Process Automation</span>
-                    </div>
-                    <div class="work__card">
-                        <a href="#" class="work__img"><img src="Assets/img/projectsmile.png" alt="Smile"></a>
-                        <span class="work__title">Project Smile UI/UX</span>
-                    </div>
-                    <div class="work__card">
-                        <a href="https://www.online-cpp.com/IQdFf7WHjV" target="_blank" class="work__img"><img src="Assets/img/bingo.png" alt="Bingo"></a>
-                        <span class="work__title">C++ Logic Development</span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="work section" id="misc">
-                <h2 class="section-title">Miscellaneous Projects</h2>
-                
-                <h3 style="text-align: center; color: var(--first-color); margin-top: 2rem;">Interactive Scratch Games</h3>
-                <div class="misc__grid bd-grid">
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/938124085" target="_blank" class="work__img"><img src="Assets/img/gameproject1.png"></a><span class="work__title">Game Project 1</span></div>
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939330739/" target="_blank" class="work__img"><img src="Assets/img/gameproject2.png"></a><span class="work__title">Game Project 2</span></div>
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/938215185/" target="_blank" class="work__img"><img src="Assets/img/gameproject3.png"></a><span class="work__title">Game Project 3</span></div>
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939363783" target="_blank" class="work__img"><img src="Assets/img/gameproject4.png"></a><span class="work__title">Game Project 4</span></div>
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939314923" target="_blank" class="work__img"><img src="Assets/img/gameproject5.png"></a><span class="work__title">Game Project 5</span></div>
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/938242384/" target="_blank" class="work__img"><img src="Assets/img/gameproject6.png"></a><span class="work__title">Game Project 6</span></div>
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939602761" target="_blank" class="work__img"><img src="Assets/img/gameproject7.png"></a><span class="work__title">Game Project 7</span></div>
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939596084/" target="_blank" class="work__img"><img src="Assets/img/gameproject8.png"></a><span class="work__title">Game Project 8</span></div>
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939390917/" target="_blank" class="work__img"><img src="Assets/img/gameproject9.png"></a><span class="work__title">Game Project 9</span></div>
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939568000/" target="_blank" class="work__img"><img src="Assets/img/gameproject10.png"></a><span class="work__title">Game Project 10</span></div>
-                    <div class="work__card"><a href="https://scratch.mit.edu/projects/939655239/" target="_blank" class="work__img"><img src="Assets/img/gameproject11.png"></a><span class="work__title">Game Project 11</span></div>
-                </div>
-
-                <h3 style="text-align: center; color: var(--first-color); margin-top: 4rem;">C++ Technical Projects</h3>
-                <div class="misc__grid bd-grid">
-                    <div class="work__card"><a href="https://www.online-cpp.com/IQdFf7WHjV" target="_blank" class="work__img"><img src="Assets/img/bingo.png"></a><span class="work__title">Bingo System</span></div>
-                    <div class="work__card"><a href="https://www.online-cpp.com/FQjvn29MCw" target="_blank" class="work__img"><img src="Assets/img/5numcalc.png"></a><span class="work__title">5-Num Calc</span></div>
-                    <div class="work__card"><a href="https://www.online-cpp.com/dM6gz7ecHo" target="_blank" class="work__img"><img src="Assets/img/numberguessgame.png"></a><span class="work__title">Guessing Game</span></div>
-                    <div class="work__card"><a href="https://www.online-cpp.com/rFJ71k9LQY" target="_blank" class="work__img"><img src="Assets/img/tempconverter.png"></a><span class="work__title">Temp Converter</span></div>
-                    <div class="work__card"><a href="https://www.online-cpp.com/6E74tVxKkl" target="_blank" class="work__img"><img src="Assets/img/tictaclol.png"></a><span class="work__title">Tic-Tac-Toe</span></div>
-                    <div class="work__card"><a href="https://www.online-cpp.com/X90jdr1bim" target="_blank" class="work__img"><img src="Assets/img/hiluworld.png"></a><span class="work__title">Hello World</span></div>
-                </div>
-            </section>
-
-            <section class="contact section" id="contact">
-                <h2 class="section-title">Contact</h2>
-                <div class="contact__container bd-grid">
-                    <form action="https://formspree.io/f/xbdwdqzz" method="POST" class="contact__form">
-                        <h3 style="margin-bottom: 1rem; color: var(--first-color);">Send a Message</h3>
-                        <input type="text" name="name" placeholder="Name" class="contact__input" required>
-                        <input type="email" name="email" placeholder="Email" class="contact__input" required>
-                        <textarea name="message" placeholder="Message" cols="0" rows="10" class="contact__input" required></textarea>
-                        <button type="submit" class="contact__button button">Send Message</button>
-                    </form>
-
-                    <div class="contact__info-card">
-                        <i class='bx bx-envelope contact__info-icon'></i>
-                        <h3 style="color: var(--first-color);">Email Me Directly</h3>
-                        <p style="color: var(--text-color); margin-bottom: 1.5rem;">Prefer using your own email client? Click the button below.</p>
-                        <a href="mailto:ejgalang.educ@gmail.com?subject=New%20Portfolio%20Message%20%7C%20Application%20%2F%20Prospect%20Employer" class="button">Open Email App</a>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="footer">
-            <p class="footer__title">Eric Joseph P. Galang Jr.</p>
-            <div class="footer__social">
-                <a href="https://www.facebook.com/ericjoseph.chols" class="footer__icon"><i class='bx bxl-facebook' ></i></a>
-                <a href="https://instagram.com/cholooos?igshid=OGQ5ZDc2ODk2ZA==" class="footer__icon"><i class='bx bxl-instagram' ></i></a>
-                <a href="https://twitter.com/cholstrssd " class="footer__icon"><i class='bx bxl-twitter' ></i></a>
-            </div>
-            <p>&#169; 2026 Professional Portfolio. All rights reserved.</p>
-        </footer>
+            </main>
 
         <script src="https://unpkg.com/scrollreveal"></script>
         <script src="Assets/js/main.js"></script>
